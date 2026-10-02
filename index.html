@@ -1,10 +1,392 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Vishesh</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f0">
+    <meta name="description" content="Vishesh Kandadai is a first-year ECE student in Hyderabad exploring robotics, embedded systems, Linux, and the meeting point between hardware and software.">
+    <title>Vishesh Kandadai | ECE, robotics &amp; things that move</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --paper: #f5f6f0;
+            --ink: #18201c;
+            --muted: #68736b;
+            --line: #d9ddd4;
+            --green: #1b4d3e;
+            --green-light: #d9e8d9;
+            --orange: #ef6847;
+            --blue: #4269d4;
+            --mono: "DM Mono", "Courier New", monospace;
+            --sans: "Space Grotesk", "Trebuchet MS", sans-serif;
+            --content: 1160px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; }
+        a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+        .wrap { width: min(var(--content), calc(100% - 64px)); margin-inline: auto; }
+        .mono, .eyebrow, .nav-links, .tag, .project-meta, .status, .footer-note {
+            font-family: var(--mono);
+            letter-spacing: 0;
+        }
+        .eyebrow { color: var(--green); font-size: 11px; text-transform: uppercase; }
+
+        .site-header { border-bottom: 1px solid var(--line); }
+        .nav {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .wordmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; }
+        .mark {
+            width: 30px;
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            color: white;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+        .nav-links { display: flex; align-items: center; gap: 30px; font-size: 11px; }
+        .nav-links a { color: var(--muted); text-decoration: none; transition: color .2s ease; }
+        .nav-links a:hover { color: var(--green); }
+        .nav-links .nav-github { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+
+        .hero { padding: 46px 0 58px; }
+        .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; }
+        .hero-copy { padding: 18px 0 24px; animation: arrive .65s both; }
+        .hero-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; }
+        .availability { width: 8px; aspect-ratio: 1; border-radius: 50%; background: #5b9c63; box-shadow: 0 0 0 4px #e1eddf; }
+        h1 { max-width: 650px; margin: 0; font-size: clamp(50px, 7vw, 88px); line-height: .98; font-weight: 600; letter-spacing: 0; }
+        h1 span { color: var(--green); }
+        .hero-lede { max-width: 510px; margin: 24px 0 0; color: #505b53; font-size: 17px; line-height: 1.7; }
+        .hero-lede strong { color: var(--ink); font-weight: 600; }
+        .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 28px; }
+        .button-link { display: inline-flex; align-items: center; gap: 11px; padding: 13px 16px; background: var(--green); color: white; font-family: var(--mono); font-size: 11px; text-decoration: none; transition: background .2s ease, transform .2s ease; }
+        .button-link:hover { background: #276750; transform: translateY(-2px); }
+        .text-link { font-family: var(--mono); font-size: 11px; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+        .hero-visual { position: relative; min-height: 390px; background: #21332c; overflow: hidden; animation: arrive .8s .08s both; }
+        .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .78; filter: saturate(.78); }
+        .hero-visual::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 38%, rgba(13, 24, 20, .82)); }
+        .visual-top, .visual-bottom { position: absolute; z-index: 1; left: 22px; right: 22px; color: white; }
+        .visual-top { top: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .visual-top span { padding: 7px 9px; background: rgba(15, 27, 22, .72); font-family: var(--mono); font-size: 10px; }
+        .visual-bottom { bottom: 21px; display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+        .visual-bottom p { max-width: 250px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.35; }
+        .visual-index { font-family: var(--mono); font-size: 10px; white-space: nowrap; color: #e1e8df; }
+
+        .ticker { border-block: 1px solid var(--line); }
+        .ticker-inner { min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .ticker-item { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); font-family: var(--mono); font-size: 10px; }
+        .ticker-item b { color: var(--ink); font-weight: 500; }
+        .ticker-dot { width: 5px; aspect-ratio: 1; border-radius: 50%; background: var(--orange); }
+
+        .section { padding: 84px 0; }
+        .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 30px; }
+        .section-heading h2 { margin: 9px 0 0; font-size: clamp(30px, 4vw, 46px); font-weight: 500; letter-spacing: 0; line-height: 1.08; }
+        .section-heading p { max-width: 370px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+        .featured-project { display: grid; grid-template-columns: .92fr 1.08fr; min-height: 390px; background: var(--green); color: white; }
+        .project-info { display: flex; flex-direction: column; align-items: start; padding: 36px; }
+        .project-meta { color: #c1d8c8; font-size: 10px; }
+        .project-info h3 { max-width: 360px; margin: 34px 0 14px; font-size: clamp(32px, 4vw, 48px); line-height: 1.05; font-weight: 500; }
+        .project-info > p { max-width: 400px; margin: 0; color: #d9e5db; font-size: 14px; line-height: 1.75; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+        .tag { padding: 7px 9px; border: 1px solid rgba(255, 255, 255, .27); color: #e4eee5; font-size: 9px; }
+        .project-link { display: inline-flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 32px; color: white; font-family: var(--mono); font-size: 11px; text-decoration: none; }
+        .project-link span { transition: transform .2s ease; }
+        .project-link:hover span { transform: translate(3px, -3px); }
+        .project-diagram { position: relative; min-height: 390px; display: grid; place-items: center; overflow: hidden; background: #dce7d9; color: var(--ink); }
+        .project-diagram::before, .project-diagram::after { position: absolute; content: ""; border: 1px solid rgba(27, 77, 62, .16); border-radius: 50%; }
+        .project-diagram::before { width: 440px; aspect-ratio: 1; }
+        .project-diagram::after { width: 330px; aspect-ratio: 1; }
+        .diagram-grid { position: absolute; inset: 0; opacity: .42; background-image: linear-gradient(rgba(27,77,62,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(27,77,62,.09) 1px, transparent 1px); background-size: 34px 34px; }
+        .flow { position: relative; z-index: 1; display: grid; gap: 11px; width: min(330px, calc(100% - 46px)); }
+        .flow-node { min-height: 49px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 13px; border: 1px solid #aabdaa; background: rgba(245, 246, 240, .94); font-family: var(--mono); font-size: 10px; }
+        .flow-node strong { font-weight: 500; }
+        .flow-node span { color: var(--muted); font-size: 9px; text-align: right; }
+        .flow-arrow { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); color: var(--green); font-family: var(--mono); font-size: 13px; line-height: 11px; }
+        .flow-node:nth-of-type(2) .flow-arrow { top: -11px; }
+        .flow-node:nth-of-type(3) .flow-arrow { top: -11px; }
+
+        .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; }
+        .about-copy { max-width: 660px; }
+        .about-copy p { margin: 0 0 17px; color: #535e56; font-size: 16px; line-height: 1.8; }
+        .about-copy p strong { color: var(--ink); font-weight: 600; }
+        .about-aside { padding-top: 8px; }
+        .aside-note { padding: 20px 0; border-top: 1px solid var(--line); }
+        .aside-note:last-child { border-bottom: 1px solid var(--line); }
+        .aside-note .eyebrow { margin-bottom: 9px; }
+        .aside-note p { margin: 0; color: #515c54; font-size: 13px; line-height: 1.65; }
+
+        .experiments { background: #e9ede5; }
+        .experiment-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #cbd3c8; border-bottom: 1px solid #cbd3c8; }
+        .experiment { min-height: 198px; padding: 23px 24px 25px 0; }
+        .experiment + .experiment { padding-left: 24px; border-left: 1px solid #cbd3c8; }
+        .experiment-index { color: var(--orange); font-family: var(--mono); font-size: 10px; }
+        .experiment h3 { margin: 23px 0 8px; font-size: 19px; font-weight: 500; }
+        .experiment p { max-width: 300px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+        .toolkit-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
+        .toolkit-column h3 { margin: 0 0 16px; font-family: var(--mono); font-size: 11px; font-weight: 400; text-transform: uppercase; color: var(--muted); }
+        .skill-row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 13px 0; border-top: 1px solid var(--line); }
+        .skill-row:last-child { border-bottom: 1px solid var(--line); }
+        .skill-row strong { font-size: 14px; font-weight: 500; }
+        .skill-row span { color: var(--muted); font-family: var(--mono); font-size: 9px; text-align: right; }
+        .toolkit-column + .toolkit-column { margin-top: 0; }
+        .learning-band { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 38px; border: 1px solid var(--line); }
+        .learning-item { min-height: 106px; padding: 18px; }
+        .learning-item + .learning-item { border-left: 1px solid var(--line); }
+        .learning-item span { color: var(--blue); font-family: var(--mono); font-size: 9px; text-transform: uppercase; }
+        .learning-item p { margin: 11px 0 0; font-size: 13px; line-height: 1.5; }
+
+        .path-section { background: var(--green); color: white; }
+        .path-section .eyebrow { color: #b9d9c1; }
+        .path-section .section-heading p { color: #c4d5ca; }
+        .path-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.28); }
+        .path-item { min-height: 164px; }
+        .path-item .eyebrow { font-size: 9px; }
+        .path-item h3 { margin: 14px 0 9px; font-size: 18px; font-weight: 500; }
+        .path-item p { max-width: 310px; margin: 0; color: #d0dfd4; font-size: 12px; line-height: 1.7; }
+        .path-item a { display: inline-block; margin-top: 12px; color: white; font-family: var(--mono); font-size: 10px; text-underline-offset: 4px; }
+        .credential { display: flex; gap: 10px; align-items: baseline; margin-top: 9px; color: #d0dfd4; font-size: 11px; }
+        .credential b { color: white; font-weight: 500; }
+
+        .contact { padding: 74px 0; }
+        .contact-row { display: flex; justify-content: space-between; align-items: end; gap: 26px; }
+        .contact h2 { max-width: 650px; margin: 10px 0 0; font-size: clamp(34px, 5vw, 58px); line-height: 1.05; font-weight: 500; }
+        .contact-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+        footer { border-top: 1px solid var(--line); }
+        .footer-row { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+        .footer-note { color: var(--muted); font-size: 9px; }
+        .footer-links { display: flex; gap: 19px; font-family: var(--mono); font-size: 10px; }
+        .footer-links a { text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+        @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+        @media (max-width: 800px) {
+            .wrap { width: min(var(--content), calc(100% - 40px)); }
+            .hero-grid { gap: 26px; grid-template-columns: 1fr .85fr; }
+            .hero-visual { min-height: 340px; }
+            .featured-project { grid-template-columns: 1fr 1fr; }
+            .project-info { padding: 28px; }
+            .project-diagram { min-height: 360px; }
+            .about-grid { gap: 36px; }
+        }
+        @media (max-width: 620px) {
+            html { scroll-padding-top: 66px; }
+            .wrap { width: calc(100% - 36px); }
+            .nav { height: 62px; }
+            .nav-links { gap: 14px; font-size: 9px; }
+            .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display: none; }
+            .hero { padding: 32px 0 34px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+            .hero-copy { padding: 7px 0 0; }
+            h1 { max-width: 480px; font-size: clamp(49px, 13vw, 72px); }
+            .hero-lede { margin-top: 18px; font-size: 15px; }
+            .hero-visual { min-height: 270px; }
+            .ticker-inner { min-height: 50px; justify-content: start; overflow: hidden; }
+            .ticker-item { flex: 0 0 auto; font-size: 9px; }
+            .ticker-item:nth-child(3), .ticker-item:nth-child(4) { display: none; }
+            .section { padding: 61px 0; }
+            .section-heading { display: block; margin-bottom: 23px; }
+            .section-heading p { margin-top: 13px; }
+            .featured-project { grid-template-columns: 1fr; }
+            .project-info { min-height: 350px; padding: 25px; }
+            .project-info h3 { margin-top: 29px; }
+            .project-diagram { min-height: 335px; }
+            .about-grid { grid-template-columns: 1fr; gap: 22px; }
+            .about-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+            .aside-note { padding: 15px 0; }
+            .experiment-grid { grid-template-columns: 1fr; }
+            .experiment { min-height: 0; padding: 19px 0 21px; }
+            .experiment + .experiment { padding-left: 0; border-left: 0; border-top: 1px solid #cbd3c8; }
+            .experiment h3 { margin: 13px 0 6px; }
+            .toolkit-grid { grid-template-columns: 1fr; gap: 30px; }
+            .learning-band { grid-template-columns: 1fr; }
+            .learning-item { min-height: 0; padding: 15px; }
+            .learning-item + .learning-item { border-left: 0; border-top: 1px solid var(--line); }
+            .path-grid { grid-template-columns: 1fr; gap: 22px; }
+            .path-item { min-height: 0; }
+            .contact { padding: 58px 0; }
+            .contact-row { display: block; }
+            .contact-actions { margin-top: 24px; }
+            .footer-row { align-items: start; flex-direction: column; justify-content: center; padding: 17px 0; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Vishesh</h1>
-    <p>ECE Student • Robotics • Embedded Systems</p>
+    <header class="site-header">
+        <nav class="nav wrap" aria-label="Main navigation">
+            <a class="wordmark" href="#top" aria-label="Vishesh Kandadai, home"><span class="mark">VK</span><span>Vishesh Kandadai</span></a>
+            <div class="nav-links">
+                <a href="#work">Selected work</a>
+                <a href="#about">About</a>
+                <a href="#toolkit">Toolkit</a>
+                <a class="nav-github" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero wrap" aria-labelledby="hero-title">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="hero-kicker eyebrow"><span class="availability" aria-hidden="true"></span> First-year ECE student · Hyderabad, India</p>
+                    <h1 id="hero-title">Vishesh<br><span>Kandadai.</span></h1>
+                    <p class="hero-lede">I like finding the point where <strong>hardware meets software</strong>: sensors, small computers, useful code, and the things we can make move.</p>
+                    <div class="hero-actions">
+                        <a class="button-link" href="#work">Explore what I’m building <span aria-hidden="true">↓</span></a>
+                        <a class="text-link" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+                    </div>
+                </div>
+                <figure class="hero-visual">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Close-up view of an electronic circuit board" fetchpriority="high">
+                    <div class="visual-top"><span>FIELD NOTES / 001</span><span>ECE × SOFTWARE</span></div>
+                    <figcaption class="visual-bottom"><p>Curious by nature.<br>Learning by building.</p><span class="visual-index">17°26′N / 78°28′E</span></figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <div class="ticker" aria-label="Areas of interest">
+            <div class="ticker-inner wrap">
+                <span class="ticker-item"><i class="ticker-dot" aria-hidden="true"></i><b>Currently exploring</b></span>
+                <span class="ticker-item">ROBOTICS</span>
+                <span class="ticker-item">EMBEDDED SYSTEMS</span>
+                <span class="ticker-item">LINUX &amp; C</span>
+            </div>
+        </div>
+
+        <section class="section wrap" id="work" aria-labelledby="work-title">
+            <div class="section-heading">
+                <div><span class="eyebrow">01 / Selected work</span><h2 id="work-title">A project with dirt<br>under its fingernails.</h2></div>
+                <p>Built with a hackathon team, a few sensors, and the idea that useful information should be easy to understand.</p>
+            </div>
+            <article class="featured-project">
+                <div class="project-info">
+                    <span class="project-meta">HACKATHON BUILD · SEPTEMBER 2026</span>
+                    <h3>Kisan-Tomodachi</h3>
+                      <p>An agricultural monitoring prototype built around an Arduino UNO R4 Minima, soil-moisture and DHT11 sensors, an LCD, and an RGB LED. A Python/FastAPI backend reads USB serial data and serves JSON; the interface concept uses visual indicators, with English, Telugu, Hindi, and Japanese planned.</p>
+                    <div class="tag-list" aria-label="Project technologies"><span class="tag">ARDUINO UNO R4</span><span class="tag">PYTHON</span><span class="tag">FASTAPI</span><span class="tag">SERIAL</span></div>
+                    <a class="project-link" href="https://github.com/VantaBlack2437/Kisan-Tomodachi" target="_blank" rel="noreferrer">Explore the project <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="project-diagram" role="img" aria-label="Kisan-Tomodachi data flow: sensors connect to Arduino, serial data reaches a Python API, then a user interface">
+                    <div class="diagram-grid" aria-hidden="true"></div>
+                    <div class="flow" aria-hidden="true">
+                        <div class="flow-node"><strong>01 / FIELD</strong><span>Soil · temp · humidity</span></div>
+                        <div class="flow-node"><i class="flow-arrow">↓</i><strong>02 / ARDUINO</strong><span>UNO R4 Minima</span></div>
+                        <div class="flow-node"><i class="flow-arrow">↓</i><strong>03 / SERIAL → API</strong><span>Python · FastAPI · JSON</span></div>
+                        <div class="flow-node"><strong>04 / INTERFACE</strong><span>Visual, multilingual concept</span></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section wrap" id="about" aria-labelledby="about-title">
+            <div class="about-grid">
+                <div>
+                    <span class="eyebrow">02 / A little context</span>
+                    <h2 id="about-title" style="margin: 10px 0 0; font-size: clamp(30px, 4vw, 46px); font-weight: 500; line-height: 1.08;">An engineer<br>in the making.</h2>
+                </div>
+                <div class="about-copy">
+                    <p>I’m a first-year <strong>Electronics and Communication Engineering</strong> student at MLR Institute of Technology in Hyderabad. This is the beginning of my engineering journey, not a finished résumé.</p>
+                    <p>I learn by getting things to work: wiring a sensor, reading its data, writing the code around it, then figuring out what broke. I’m building my foundations in C and algorithms while exploring embedded systems, robotics, automation, and computer vision.</p>
+                      <p>Linux has been part of my everyday toolkit for years. Alongside Arch-based distributions, I’ve explored KDE Plasma, Hyprland, Wayland, PipeWire, system configuration, NVIDIA/CUDA setups, and local LLMs. These are personal experiments, not professional specialties.</p>
+                      <p>I’m drawn to Japan’s robotics and technology ecosystem, and I’m learning Japanese with that long-term direction in mind.</p>
+                </div>
+            </div>
+            <div class="about-aside">
+                <div class="aside-note"><span class="eyebrow">The through-line</span><p>Physical systems made more useful through thoughtful software.</p></div>
+                <div class="aside-note"><span class="eyebrow">The long view</span><p>Grow into robotics and embedded engineering, with future study or work in Japan as a goal.</p></div>
+                <div class="aside-note"><span class="eyebrow">Away from the bench</span><p>Japanese language and culture, rock and pop music, and anime, especially the films of Makoto Shinkai.</p></div>
+            </div>
+        </section>
+
+        <section class="section experiments" aria-labelledby="experiments-title">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div><span class="eyebrow">03 / Bench experiments</span><h2 id="experiments-title">Small builds, real signals.</h2></div>
+                    <p>Side projects and component experiments that make the fundamentals tangible.</p>
+                </div>
+                <div class="experiment-grid">
+                    <article class="experiment"><span class="experiment-index">01 — LIGHT</span><h3>RGB effects controller</h3><p>PWM-controlled red, green, and blue LED channels, explored through Arduino code.</p></article>
+                    <article class="experiment"><span class="experiment-index">02 — TIME</span><h3>Hardware Pomodoro</h3><p>A timer concept with an Arduino, LCD, buzzer, and rotary encoder.</p></article>
+                    <article class="experiment"><span class="experiment-index">03 — SENSING</span><h3>Inputs from the world</h3><p>Hands-on trials with DHT11, soil moisture, IR, LDR, RFID, and ultrasonic sensors.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section wrap" id="toolkit" aria-labelledby="toolkit-title">
+            <div class="section-heading">
+                <div><span class="eyebrow">04 / Tools &amp; practice</span><h2 id="toolkit-title">A growing toolkit.</h2></div>
+                <p>Things I’ve used, things I’m practicing, and plenty left to learn.</p>
+            </div>
+            <div class="toolkit-grid">
+                <div class="toolkit-column">
+                    <h3>Building &amp; programming</h3>
+                    <div class="skill-row"><strong>C</strong><span>ACTIVE PRACTICE</span></div>
+                    <div class="skill-row"><strong>Arduino / C++</strong><span>HARDWARE BUILDS</span></div>
+                    <div class="skill-row"><strong>Python · FastAPI</strong><span>BACKEND &amp; AUTOMATION</span></div>
+                    <div class="skill-row"><strong>Git · GitHub · JSON · REST</strong><span>PROJECT TOOLING</span></div>
+                    <div class="skill-row"><strong>HTML · CSS · Bash</strong><span>WORKED WITH</span></div>
+                </div>
+                <div class="toolkit-column">
+                    <h3>Systems &amp; electronics</h3>
+                    <div class="skill-row"><strong>Linux</strong><span>DAILY SYSTEMS PRACTICE</span></div>
+                    <div class="skill-row"><strong>Arch-based distributions</strong><span>MANJARO · ENDEAVOUROS</span></div>
+                    <div class="skill-row"><strong>Neovim · GCC · Clang</strong><span>DEVELOPMENT TOOLS</span></div>
+                    <div class="skill-row"><strong>Sensors · GPIO · PWM</strong><span>HANDS-ON ELECTRONICS</span></div>
+                    <div class="skill-row"><strong>USB serial communication</strong><span>HARDWARE / SOFTWARE</span></div>
+                </div>
+            </div>
+            <div class="learning-band" aria-label="Current learning">
+                <div class="learning-item"><span>In progress / 01</span><p>C fundamentals, pointers, memory, and problem solving.</p></div>
+                <div class="learning-item"><span>In progress / 02</span><p>LeetCode practice, starting with approachable algorithms.</p></div>
+                <div class="learning-item"><span>In progress / 03</span><p>Japanese: Hiragana learned; Katakana, Kanji, and listening underway.</p></div>
+            </div>
+        </section>
+
+        <section class="section path-section" aria-labelledby="path-title">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div><span class="eyebrow">05 / The longer arc</span><h2 id="path-title">Learning with a direction.</h2></div>
+                    <p>Build strong engineering foundations here. Keep an eye on what might be possible in Japan.</p>
+                </div>
+                <div class="path-grid">
+                    <article class="path-item"><span class="eyebrow">EDUCATION</span><h3>MLR Institute of Technology</h3><p>B.Tech, Electronics and Communication Engineering · Hyderabad, Telangana<br>2026–2030 · First year</p></article>
+                    <article class="path-item"><span class="eyebrow">LANGUAGE</span><h3>Japanese, step by step</h3><p>Currently around N5 in writing and N4 verbally. Working toward N2, with N1 as a longer-term ambition.</p></article>
+                    <article class="path-item"><span class="eyebrow">CREDENTIALS</span><h3>Learning &amp; participation</h3><div class="credential"><b>Linux Mastery</b><span>Udemy course</span></div><div class="credential"><b>MLRITM India–Japan Innovation Regional Hackathon 2026</b><span>Participant · 12 hours</span></div></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact wrap" aria-labelledby="contact-title">
+            <div class="contact-row">
+                <div><span class="eyebrow">06 / Keep in touch</span><h2 id="contact-title">Good things start<br>with a working prototype.</h2></div>
+                <div class="contact-actions"><a class="button-link" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/VantaBlack2437?tab=repositories" target="_blank" rel="noreferrer">Browse repositories</a></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-row wrap"><span class="footer-note">A living logbook · Built while learning · Hyderabad, India</span><div class="footer-links"><a href="#top">Back to top ↑</a><a href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">GitHub ↗</a></div></div>
+    </footer>
 </body>
 </html>
