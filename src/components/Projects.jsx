@@ -1,87 +1,40 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useState } from "react";
+import DepthCarousel from "./DepthCarousel.jsx";
 import { secondaryProjects, screenshotSlides } from "../data/portfolio.js";
+
+const depthCarouselItems = screenshotSlides.map(({ src, alt }) => ({ image: src, alt }));
 
 function ScreenshotCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const viewportRef = useRef(null);
-
-  function renderSlide(index) {
-    const nextIndex = Math.min(screenshotSlides.length - 1, Math.max(0, index));
-    setActiveSlide(nextIndex);
-    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-    viewportRef.current?.scrollTo({ left: nextIndex * viewportRef.current.clientWidth, behavior });
-  }
-
-  function handleScroll() {
-    const viewport = viewportRef.current;
-    if (!viewport?.clientWidth) return;
-    const position = viewport.scrollLeft / viewport.clientWidth;
-    const nearestSlide = Math.round(position);
-    if (Math.abs(position - nearestSlide) < 0.01) setActiveSlide(nearestSlide);
-  }
-
-  function handleKeyDown(event) {
-    if (event.key === "ArrowLeft") renderSlide(activeSlide - 1);
-    if (event.key === "ArrowRight") renderSlide(activeSlide + 1);
-  }
 
   const count = String(activeSlide + 1).padStart(2, "0");
   const total = String(screenshotSlides.length).padStart(2, "0");
 
   return (
     <div className="screenshot-carousel" role="group" aria-label="Kisan-Tomodachi interface screenshots">
-      <div
-        className="screenshot-viewport"
-        ref={viewportRef}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Project interface screenshots"
-        tabIndex={0}
-        onScroll={handleScroll}
-        onKeyDown={handleKeyDown}
-      >
-        <div className="screenshot-track">
-          {screenshotSlides.map((slide, index) => (
-            <figure
-              className="screenshot-slide"
-              key={slide.src}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${index + 1} of ${screenshotSlides.length}: ${slide.description}`}
-            >
-              <img src={slide.src} alt={slide.alt} loading="lazy" />
-            </figure>
-          ))}
-        </div>
-      </div>
-      <div className="screenshot-controls">
-        <div className="screenshot-caption" aria-live="polite" aria-atomic="true">
+      <DepthCarousel
+        items={depthCarouselItems}
+        cardWidth={560}
+        cardHeight={277}
+        radius={4}
+        tint="#10251d"
+        depth={112}
+        spread={12}
+        tilt={9}
+        perspective={1400}
+        visibleCards={4}
+        falloff={0.2}
+        blur={2}
+        autoplay
+        autoplayDelay={3200}
+        loop
+        onChange={index => setActiveSlide(index)}
+        ariaLabel="Kisan-Tomodachi interface screenshots"
+      />
+      <p className="screenshot-caption" aria-live="polite" aria-atomic="true">
           <span className="screenshot-count">{count} / {total}</span>
           <span className="screenshot-title">{screenshotSlides[activeSlide].label}</span>
-        </div>
-        <div className="screenshot-buttons">
-          <button
-            className="screenshot-button"
-            type="button"
-            aria-label="Previous screenshot"
-            title="Previous screenshot"
-            disabled={activeSlide === 0}
-            onClick={() => renderSlide(activeSlide - 1)}
-          >
-            ←
-          </button>
-          <button
-            className="screenshot-button"
-            type="button"
-            aria-label="Next screenshot"
-            title="Next screenshot"
-            disabled={activeSlide === screenshotSlides.length - 1}
-            onClick={() => renderSlide(activeSlide + 1)}
-          >
-            →
-          </button>
-        </div>
-      </div>
+      </p>
     </div>
   );
 }

@@ -1,25 +1,6 @@
+import ProfileCard from "./ProfileCard.jsx";
+
 export default function Hero() {
-  function handlePointerMove(event) {
-    if (event.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const card = event.currentTarget;
-    const bounds = card.getBoundingClientRect();
-    const pointerX = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
-    const pointerY = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
-    card.style.setProperty("--pointer-x", `${pointerX * 100}%`);
-    card.style.setProperty("--pointer-y", `${pointerY * 100}%`);
-    card.style.setProperty("--tilt-x", `${(0.5 - pointerY) * 10}deg`);
-    card.style.setProperty("--tilt-y", `${(pointerX - 0.5) * 12}deg`);
-  }
-
-  function handlePointerLeave(event) {
-    const card = event.currentTarget;
-    card.style.setProperty("--pointer-x", "50%");
-    card.style.setProperty("--pointer-y", "50%");
-    card.style.setProperty("--tilt-x", "0deg");
-    card.style.setProperty("--tilt-y", "0deg");
-  }
-
   return (
     <section className="hero wrap" aria-labelledby="hero-title">
       <div className="hero-grid">
@@ -40,27 +21,24 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <figure
+        <ProfileCard
           className="hero-profile"
-          aria-label="Vishesh Kandadai profile card"
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
-        >
-          <div className="profile-card">
-            <img src="/profile/me.png" alt="Portrait of Vishesh Kandadai" fetchPriority="high" />
-            <div className="profile-card-top"><span>ECE · ROBOTICS · EMBEDDED SYSTEMS</span></div>
-            <figcaption className="profile-card-info">
-              <div className="profile-card-person">
-                <span className="profile-monogram" aria-hidden="true">VK</span>
-                <span className="profile-card-copy">
-                  <strong>Vishesh Kandadai</strong>
-                  <span>@VantaBlack2437 · FIRST-YEAR ECE</span>
-                </span>
-              </div>
-              <a className="profile-contact" href="mailto:kvishesh.dev@gmail.com">Contact ↗</a>
-            </figcaption>
-          </div>
-        </figure>
+          avatarUrl="/profile/me.png"
+          miniAvatarUrl="/profile/me.png"
+          name="Vishesh Kandadai"
+          title="First-year ECE · Robotics"
+          handle="VantaBlack2437"
+          status="First-year · MLRIT Hyderabad"
+          contactText="Email me ↗"
+          iconUrl="/profile/card-pattern.svg"
+          enableTilt
+          enableMobileTilt={false}
+          behindGlowEnabled
+          behindGlowColor="rgba(239,104,71,.3)"
+          behindGlowSize="40%"
+          innerGradient="linear-gradient(145deg,rgba(27,77,62,.82) 0%,rgba(20,45,36,.92) 100%)"
+          onContactClick={() => { window.location.href = "mailto:kvishesh.dev@gmail.com"; }}
+        />
       </div>
     </section>
   );
