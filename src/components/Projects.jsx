@@ -101,8 +101,53 @@ function BaburuProject({ project }) {
   );
 }
 
+function TrackerProject({ project }) {
+  return (
+    <article className="lab-project tracker-project" data-project={project.id}>
+      <div className="lab-project-top"><span>{project.category}</span><span>{project.index}</span></div>
+      <h3>{project.name}</h3>
+      <p className="lab-project-summary">{project.summary}</p>
+
+      <div className="tracker-media" aria-label="2D-Tracker demonstration media">
+        <video controls preload="metadata" poster="/screenshots/2d-tracker/Centered.jpg">
+          <source src="/screenshots/2d-tracker/demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div className="tracker-gallery" aria-label="2D-Tracker images">
+        <figure className="tracker-gallery-item">
+          <img src="/screenshots/2d-tracker/Centered.jpg" alt="Centered 2D-Tracker target alignment view" loading="lazy" />
+        </figure>
+        <figure className="tracker-gallery-item">
+          <img src="/screenshots/2d-tracker/tracking_left.jpg" alt="2D-Tracker tracking a target to the left" loading="lazy" />
+        </figure>
+      </div>
+
+      <div className="tracker-architecture" aria-label="2D-Tracker system architecture">
+        {project.architecture.map(({ label, value }) => (
+          <div className="tracker-node" key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
+        ))}
+      </div>
+
+      <div className="tracker-status" aria-label="Project status">
+        <span className="status-dot" aria-hidden="true" />
+        <span>{project.status}</span>
+      </div>
+
+      <div className="lab-tags" aria-label="2D-Tracker technologies">
+        {project.technologies.map(technology => <span key={technology}>{technology}</span>)}
+      </div>
+
+      <ProjectDetails items={project.details} />
+    </article>
+  );
+}
+
 export default function Projects() {
-  const [magi, baburu] = secondaryProjects;
+  const [magi, baburu, tracker] = secondaryProjects;
 
   return (
     <section className="section wrap" id="work" aria-labelledby="work-title">
@@ -136,12 +181,13 @@ export default function Projects() {
 
       <div className="project-lab" aria-labelledby="project-lab-title">
         <div className="project-lab-heading">
-          <div><span className="eyebrow">Also on the workbench</span><h3 id="project-lab-title">Two software experiments.</h3></div>
-          <p>Exploring how AI systems can deliberate, remember, and feel more interactive.</p>
+          <div><span className="eyebrow">Also on the workbench</span><h3 id="project-lab-title">Three experiments and prototypes.</h3></div>
+          <p>Exploring how AI, sensing, and control systems can become more interactive, useful, and physical.</p>
         </div>
         <div className="project-lab-grid">
           <MagiProject project={magi} />
           <BaburuProject project={baburu} />
+          <TrackerProject project={tracker} />
         </div>
       </div>
     </section>

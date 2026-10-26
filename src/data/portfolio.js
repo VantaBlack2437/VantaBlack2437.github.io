@@ -48,7 +48,7 @@ export const screenshotSlides = [
 export const secondaryProjects = [
   {
     id: "magi",
-    index: "01 / 02",
+    index: "01 / 03",
     category: "Experimental · Multi-agent AI",
     name: "Magi",
     summary:
@@ -88,7 +88,7 @@ export const secondaryProjects = [
   },
   {
     id: "baburu",
-    index: "02 / 02",
+    index: "02 / 03",
     category: "Ongoing experiment · AI character",
     name: "Baburu",
     summary:
@@ -120,6 +120,65 @@ export const secondaryProjects = [
         title: "Voice",
         description:
           "Earlier versions used Microsoft Edge TTS to speak generated replies through a connected voice channel.",
+      },
+    ],
+  },
+  {
+    id: "tracker",
+    index: "03 / 03",
+    category: "Robotics · Computer Vision · Embedded Systems · Control Systems",
+    name: "2D-Tracker",
+    summary:
+      "A camera-guided motion-tracking platform built using salvaged printer hardware, OpenCV, Python, and an Arduino-based motor controller.",
+    architecture: [
+      { label: "01 / CAMERA", value: "Target detection" },
+      { label: "02 / OPENCV", value: "HSV thresholding" },
+      { label: "03 / FILTER", value: "Alpha-beta estimator" },
+      { label: "04 / CONTROLLER", value: "Predictive PD-like logic" },
+      { label: "05 / SERIAL", value: "Velocity commands" },
+      { label: "06 / ARDUINO", value: "Motor + watchdog" },
+    ],
+    technologies: [
+      "PYTHON",
+      "OPENCV",
+      "NUMPY",
+      "ARDUINO",
+      "C/C++",
+      "SERIAL COMMUNICATION",
+      "COMPUTER VISION",
+      "MOTION CONTROL",
+    ],
+    status: "Working prototype; ongoing experimentation and refinement.",
+    details: [
+      {
+        title: "Overview",
+        description:
+          "2D-Tracker repurposes a discarded inkjet printer into a vision-guided motion-tracking system. A camera detects a target, Python estimates its motion, and a predictive controller sends velocity commands to the carriage.",
+      },
+      {
+        title: "Hardware",
+        description:
+          "The project reuses the printer carriage, belt-driven mechanism, DC motors, camera, and an Arduino-based motion controller. The mechanical system was adapted rather than designed from scratch.",
+      },
+      {
+        title: "Software + control",
+        description:
+          "Target detection uses color-based filtering and HSV thresholding, while the alpha-beta filter smooths position and velocity estimates. The controller is PD-like and predictive rather than a conventional PID loop, with hysteresis and slew limiting to reduce oscillation.",
+      },
+      {
+        title: "Iteration",
+        description:
+          "The work moved from abrupt pulse commands toward continuous velocity control as the team tuned for less overshoot, better smoothness, and more stable target acquisition near the center.",
+      },
+      {
+        title: "Challenges",
+        description:
+          "The key difficulty was coordinating camera processing, timing, motor output, and firmware constraints. Tuning the loop required repeated adjustments to thresholds, acceleration, and tracking gain.",
+      },
+      {
+        title: "Future work",
+        description:
+          "Next steps include richer tracking-error visualization, more systematic calibration, broader performance testing, and additional motion capability as the prototype evolves.",
       },
     ],
   },
