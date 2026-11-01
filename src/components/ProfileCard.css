@@ -400,6 +400,15 @@
   -webkit-background-clip: text;
 }
 
+.hero-profile .pc-avatar-content {
+  mix-blend-mode: normal;
+}
+
+.hero-profile .pc-shine,
+.hero-profile .pc-glare {
+  display: none;
+}
+
 @keyframes glow-bg {
   0% {
     --bgrotate: 0deg;

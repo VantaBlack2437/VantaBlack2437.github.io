@@ -19,6 +19,9 @@ export default function Hero() {
             <a className="text-link" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">
               GitHub profile ↗
             </a>
+            <a className="text-link" href="https://www.linkedin.com/in/vishesh-kandadai/" target="_blank" rel="noreferrer">
+              LinkedIn ↗
+            </a>
           </div>
         </div>
         <ProfileCard

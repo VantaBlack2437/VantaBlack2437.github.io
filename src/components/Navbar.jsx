@@ -12,8 +12,11 @@ export default function Navbar() {
           {navigationLinks.map(({ label, href }) => (
             <a href={href} key={href}>{label}</a>
           ))}
-          <a className="nav-github" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">
+          <a className="nav-social nav-github" href="https://github.com/VantaBlack2437" target="_blank" rel="noreferrer">
             GitHub ↗
+          </a>
+          <a className="nav-social nav-linkedin" href="https://www.linkedin.com/in/vishesh-kandadai/" target="_blank" rel="noreferrer">
+            LinkedIn ↗
           </a>
         </div>
       </nav>
