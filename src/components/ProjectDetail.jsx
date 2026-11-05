@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { projectCases } from "../data/projectCases.js";
 import ProjectMedia from "./ProjectMedia.jsx";
+import SplashScreen from "./SplashScreen.jsx";
 
 export default function ProjectDetail({ projectId }) {
   const projectIndex = projectCases.findIndex(project => project.id === projectId);
@@ -80,6 +81,7 @@ export default function ProjectDetail({ projectId }) {
           <a className="case-next" href={`#/projects/${next.id}`}><span>NEXT / {next.number} →</span><strong>{next.title}</strong></a>
         </div>
       </nav>
+      <SplashScreen key={project.id} project={project} />
     </main>
   );
 }
