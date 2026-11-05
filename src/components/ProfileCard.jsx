@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Mail01Icon } from '@hugeicons/core-free-icons';
 import './ProfileCard.css';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
@@ -352,6 +354,7 @@ const ProfileCardComponent = ({
                     type="button"
                     aria-label={`Contact ${name || 'user'}`}
                   >
+                    <HugeiconsIcon icon={Mail01Icon} size={16} strokeWidth={1.8} aria-hidden="true" />
                     {contactText}
                   </button>
                 </div>

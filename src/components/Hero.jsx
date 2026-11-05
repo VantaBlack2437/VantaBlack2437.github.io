@@ -31,15 +31,15 @@ export default function Hero() {
           name="Vishesh Kandadai"
           title="First-year ECE · Robotics"
           handle="VantaBlack2437"
-          status="First-year · MLRIT Hyderabad"
+          status="MLRIT Hyderabad"
           contactText="Email me ↗"
           iconUrl="/profile/card-pattern.svg"
           enableTilt
           enableMobileTilt={false}
           behindGlowEnabled
-          behindGlowColor="rgba(239,104,71,.3)"
-          behindGlowSize="40%"
-          innerGradient="linear-gradient(145deg,rgba(27,77,62,.82) 0%,rgba(20,45,36,.92) 100%)"
+          behindGlowColor="rgba(128,240,160,.2)"
+          behindGlowSize="42%"
+          innerGradient="linear-gradient(145deg,rgba(18,24,21,.92) 0%,rgba(10,13,12,.98) 100%)"
           onContactClick={() => { window.location.href = "mailto:kvishesh.dev@gmail.com"; }}
         />
       </div>
